@@ -39,9 +39,6 @@ const LayoutConfig = ({ children }: Iprops) => {
     },
   ];
 
-  useEffect(() => {
-    console.log('Re-render');
-  }, []);
   return (
     <StyledLayout>
       <Sider
@@ -59,10 +56,10 @@ const LayoutConfig = ({ children }: Iprops) => {
       </Sider>
       <Layout className="site-layout">
         <Header className="site-layout-background" style={{ padding: 0 }} />
-        <Content style={{ margin: '0 16px' }}>{children}</Content>
-        <Footer style={{ textAlign: 'center' }}>
+        <Content style={{ margin: '16px 16px' }}>{children}</Content>
+        {/* <Footer style={{ textAlign: 'center' }}>
           Created by <b>No Bug, No Issue</b>
-        </Footer>
+        </Footer> */}
       </Layout>
     </StyledLayout>
   );

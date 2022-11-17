@@ -29,6 +29,8 @@ import 'antd/dist/antd.css';
 
 // Initialize languages
 import './locales/i18n';
+import { ConfigProvider } from 'antd';
+import vi_VN from 'antd/es/locale/vi_VN';
 
 // Observe loading of Inter (to remove 'Inter', remove the <link> tag in
 // the index.html file and this observer)
@@ -44,13 +46,15 @@ const MOUNT_NODE = document.getElementById('root') as HTMLElement;
 
 ReactDOM.render(
   <Provider store={store}>
-    <ThemeProvider>
-      <HelmetProvider>
-        {/* <React.StrictMode> */}
-        <App />
-        {/* </React.StrictMode> */}
-      </HelmetProvider>
-    </ThemeProvider>
+    <ConfigProvider locale={vi_VN}>
+      <ThemeProvider>
+        <HelmetProvider>
+          {/* <React.StrictMode> */}
+          <App />
+          {/* </React.StrictMode> */}
+        </HelmetProvider>
+      </ThemeProvider>
+    </ConfigProvider>
   </Provider>,
   MOUNT_NODE,
 );
