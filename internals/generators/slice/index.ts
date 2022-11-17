@@ -11,7 +11,7 @@ import { baseGeneratorPath } from '../paths';
 
 inquirer.registerPrompt('directory', require('inquirer-directory'));
 
-export const enum SliceProptNames {
+export enum SliceProptNames {
   'sliceName' = 'sliceName',
   'path' = 'path',
   'wantSaga' = 'wantSaga',

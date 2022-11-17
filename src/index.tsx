@@ -9,51 +9,50 @@ import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 
 import * as React from 'react';
-import ReactDOM from 'react-dom/client';
+import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import FontFaceObserver from 'fontfaceobserver';
 
 // Use consistent styling
 import 'sanitize.css/sanitize.css';
 
-// Import root app
 import { App } from 'app';
 
 import { HelmetProvider } from 'react-helmet-async';
 
 import { configureAppStore } from 'store/configureStore';
 
+import { ThemeProvider } from 'styles/theme/ThemeProvider';
+
 import reportWebVitals from 'reportWebVitals';
+import 'antd/dist/antd.css';
 
 // Initialize languages
 import './locales/i18n';
 
-import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
-import { ManageGroup } from 'app/pages/ManageGrouds';
+// Observe loading of Inter (to remove 'Inter', remove the <link> tag in
+// the index.html file and this observer)
+const openSansObserver = new FontFaceObserver('Inter', {});
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-  },
-  {
-    path: '/quan-ly-nhom',
-    element: <ManageGroup />,
-  },
-]);
+// When Inter is loaded, add a font-family using Inter to the body
+openSansObserver.load().then(() => {
+  document.body.classList.add('fontLoaded');
+});
 
 const store = configureAppStore();
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement,
-);
+const MOUNT_NODE = document.getElementById('root') as HTMLElement;
 
-root.render(
+ReactDOM.render(
   <Provider store={store}>
-    <HelmetProvider>
-      <React.StrictMode>
-        <RouterProvider router={router} />
-      </React.StrictMode>
-    </HelmetProvider>
+    <ThemeProvider>
+      <HelmetProvider>
+        {/* <React.StrictMode> */}
+        <App />
+        {/* </React.StrictMode> */}
+      </HelmetProvider>
+    </ThemeProvider>
   </Provider>,
+  MOUNT_NODE,
 );
 
 // Hot reloadable translation json files

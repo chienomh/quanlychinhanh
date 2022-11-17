@@ -2,7 +2,8 @@
   "recommendations": [
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
-    "styled-components.vscode-styled-components",
-    "orta.vscode-jest"
+    "msjsdiag.debugger-for-chrome",
+    "eg2.vscode-npm-script",
+    "jpoissonnier.vscode-styled-components"
   ]
 }
