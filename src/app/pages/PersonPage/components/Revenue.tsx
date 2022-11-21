@@ -1,4 +1,4 @@
-import { Card, Typography } from 'antd';
+import { Card, Result, Typography } from 'antd';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -33,49 +33,56 @@ const Revenue = () => {
           selectedTime={selectTime}
         />
       </div>
-      <div className="revenueWrap">
-        <Card
-          headStyle={{ backgroundColor: '#ccc' }}
-          title="Doanh thu sỉ lẻ"
-          className="cardInfo"
-        >
-          <p>
-            Tổng đơn hàng: {revenueSelectedMonth?.retailRevenue?.totalOrder}
+      {revenueSelectedMonth ? (
+        <>
+          <div className="revenueWrap">
+            <Card
+              headStyle={{ backgroundColor: '#ccc' }}
+              title="Doanh thu sỉ lẻ"
+              className="cardInfo"
+            >
+              <p>
+                Tổng đơn hàng: {revenueSelectedMonth?.retailRevenue?.totalOrder}
+              </p>
+              <p>Vốn: {revenueSelectedMonth?.retailRevenue.capital}đ</p>
+              <p>Lợi nhuận: {revenueSelectedMonth?.retailRevenue?.interest}đ</p>
+            </Card>
+            <Card
+              headStyle={{ backgroundColor: '#ccc' }}
+              title="Doanh thu đội nhóm"
+              className="cardInfo"
+            >
+              <p>
+                Tổng số thành viên:{' '}
+                {revenueSelectedMonth?.groupRevenue?.totalMember}
+              </p>
+              <p>
+                Lợi nhuận đạt được:{' '}
+                {revenueSelectedMonth?.groupRevenue?.interest}đ
+              </p>
+            </Card>
+            <Card
+              headStyle={{ backgroundColor: '#ccc' }}
+              title="Tiền thưởng"
+              className="cardInfo"
+            >
+              <p>Thành tiền: {revenueSelectedMonth?.bonus}đ</p>
+            </Card>
+          </div>
+          <h1 className="totalMoneySpan">
+            Tổng tiền nhận được: {revenueSelectedMonth?.totalMoney}đ
+          </h1>
+          <p className="nextLevelSpan">
+            <AiFillExclamationCircle className="iconWarn" />
+            <span>
+              Bạn cần hoàn thành 50.000.000đ để vị trí giám đốc có mức chiết
+              khấu 55% và nhận về tối thiểu 37.000.000đ
+            </span>
           </p>
-          <p>Vốn: {revenueSelectedMonth?.retailRevenue.capital}đ</p>
-          <p>Lợi nhuận: {revenueSelectedMonth?.retailRevenue?.interest}đ</p>
-        </Card>
-        <Card
-          headStyle={{ backgroundColor: '#ccc' }}
-          title="Doanh thu đội nhóm"
-          className="cardInfo"
-        >
-          <p>
-            Tổng số thành viên:{' '}
-            {revenueSelectedMonth?.groupRevenue?.totalMember}
-          </p>
-          <p>
-            Lợi nhuận đạt được: {revenueSelectedMonth?.groupRevenue?.interest}đ
-          </p>
-        </Card>
-        <Card
-          headStyle={{ backgroundColor: '#ccc' }}
-          title="Tiền thưởng"
-          className="cardInfo"
-        >
-          <p>Thành tiền: {revenueSelectedMonth?.bonus}đ</p>
-        </Card>
-      </div>
-      <h1 className="totalMoneySpan">
-        Tổng tiền nhận được: {revenueSelectedMonth?.totalMoney}đ
-      </h1>
-      <p className="nextLevelSpan">
-        <AiFillExclamationCircle className="iconWarn" />
-        <span>
-          Bạn cần hoàn thành 50.000.000đ để vị trí giám đốc có mức chiết khấu
-          55% và nhận về tối thiểu 37.000.000đ
-        </span>
-      </p>
+        </>
+      ) : (
+        <Result title="Không có dữ liệu doanh thu" status={404} />
+      )}
     </Wrapper>
   );
 };

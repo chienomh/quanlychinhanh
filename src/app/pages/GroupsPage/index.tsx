@@ -1,15 +1,17 @@
 import LayoutConfig from 'components/layouts';
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import Chart from './components/Chart';
+import { Wrapper } from './style';
 
 const GroupsPage = () => {
   return (
-    <div>
+    <Wrapper>
       <Helmet>
         <title>Quản lý đội nhóm</title>
       </Helmet>
-      Quản lý nhóm
-    </div>
+      <Chart />
+    </Wrapper>
   );
 };
 
