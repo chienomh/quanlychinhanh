@@ -1,7 +1,7 @@
 import { Layout, Menu } from 'antd';
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaUserAlt, FaBoxOpen } from 'react-icons/fa';
+import { FaUserAlt, FaBoxOpen, FaSketch } from 'react-icons/fa';
 import { MdGroups } from 'react-icons/md';
 import { BsBorderStyle } from 'react-icons/bs';
 import { Logo, StyledLayout } from './style';
@@ -33,9 +33,9 @@ const LayoutConfig = ({ children }: Iprops) => {
       icon: <FaBoxOpen />,
     },
     {
-      key: '/orders',
-      label: <Link to="/orders">Đơn hàng sỉ</Link>,
-      icon: <BsBorderStyle />,
+      key: '/roses',
+      label: <Link to="/roses">Hoa hồng</Link>,
+      icon: <FaSketch />,
     },
   ];
 
