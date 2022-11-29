@@ -23,6 +23,10 @@ const Revenue = () => {
     (item: any) => item.month === moment(selectTime).format('MM/YYYY'),
   );
 
+  const formatNumber = (number: number) => {
+    return new Intl.NumberFormat().format(number) || number;
+  };
+
   return (
     <Wrapper>
       <div className="selectTime">
@@ -42,10 +46,17 @@ const Revenue = () => {
               className="cardInfo"
             >
               <p>
-                Tổng đơn hàng: {revenueSelectedMonth?.retailRevenue?.totalOrder}
+                Tổng đơn hàng:{' '}
+                {formatNumber(revenueSelectedMonth?.retailRevenue?.totalOrder)}
               </p>
-              <p>Vốn: {revenueSelectedMonth?.retailRevenue.capital}đ</p>
-              <p>Lợi nhuận: {revenueSelectedMonth?.retailRevenue?.interest}đ</p>
+              <p>
+                Vốn:{' '}
+                {formatNumber(revenueSelectedMonth?.retailRevenue?.capital)}đ
+              </p>
+              <p>
+                Lợi nhuận:{' '}
+                {formatNumber(revenueSelectedMonth?.retailRevenue?.interest)}đ
+              </p>
             </Card>
             <Card
               headStyle={{ backgroundColor: '#ccc' }}
@@ -54,11 +65,11 @@ const Revenue = () => {
             >
               <p>
                 Tổng số thành viên:{' '}
-                {revenueSelectedMonth?.groupRevenue?.totalMember}
+                {formatNumber(revenueSelectedMonth?.groupRevenue?.totalMember)}
               </p>
               <p>
                 Lợi nhuận đạt được:{' '}
-                {revenueSelectedMonth?.groupRevenue?.interest}đ
+                {formatNumber(revenueSelectedMonth?.groupRevenue?.interest)}đ
               </p>
             </Card>
             <Card
@@ -66,11 +77,12 @@ const Revenue = () => {
               title="Tiền thưởng"
               className="cardInfo"
             >
-              <p>Thành tiền: {revenueSelectedMonth?.bonus}đ</p>
+              <p>Thành tiền: {formatNumber(revenueSelectedMonth?.bonus)}đ</p>
             </Card>
           </div>
           <h1 className="totalMoneySpan">
-            Tổng tiền nhận được: {revenueSelectedMonth?.totalMoney}đ
+            Tổng tiền nhận được:{' '}
+            {formatNumber(revenueSelectedMonth?.totalMoney)}đ
           </h1>
           <p className="nextLevelSpan">
             <AiFillExclamationCircle className="iconWarn" />
