@@ -1,11 +1,3 @@
-/**
- *
- * App
- *
- * This component is the skeleton around the actual pages, and should only
- * contain code that should be seen on all pages. (e.g. navigation bar)
- */
-
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
@@ -18,7 +10,7 @@ import PersonalPage from './pages/PersonPage';
 import GroupsPage from './pages/GroupsPage';
 import LayoutConfig from 'components/layouts';
 import ProductsPage from './pages/ProductsPage';
-import OrdersPage from './pages/OrdersPage';
+import RosesPage from './pages/RosesPage';
 
 export function App() {
   const { i18n } = useTranslation();
@@ -53,8 +45,8 @@ export function App() {
 
           <Route
             exact
-            path={process.env.PUBLIC_URL + '/orders'}
-            component={OrdersPage}
+            path={process.env.PUBLIC_URL + '/roses'}
+            component={RosesPage}
           />
           <Route component={NotFoundPage} />
         </Switch>
