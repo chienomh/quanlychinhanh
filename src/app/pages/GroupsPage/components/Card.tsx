@@ -1,20 +1,23 @@
 import { Tooltip } from 'antd';
 import React from 'react';
 import styled from 'styled-components';
-import { StyledCard } from './style';
+import { formatNumber } from 'utils/formatNumber';
 
 interface Iprops {
   avatar?: string;
   name: string;
   position: string;
   desc?: string;
+  onClick?: any;
+  label?: string;
+  total: number;
 }
 
 const CardInfo = (props: Iprops) => {
-  const { name, avatar, position, desc } = props;
+  const { name, avatar, position, desc, onClick, label, total } = props;
   return (
-    <Tooltip title="Nhấn để xem doanh thu của nhóm">
-      <StyledCard>
+    <Tooltip title={label || ''} overlayStyle={{ textAlign: 'center' }}>
+      <StyledCard onClick={onClick ? onClick : () => {}}>
         <img
           src={
             avatar
@@ -26,9 +29,40 @@ const CardInfo = (props: Iprops) => {
         <p className="spanName">{name}</p>
         <p className="spanPositon">{position}</p>
         <p className="spanDesc">{desc}</p>
+        <p>Doanh thu: {formatNumber(total)}đ</p>
       </StyledCard>
     </Tooltip>
   );
 };
 
 export default CardInfo;
+
+export const StyledCard = styled.div`
+  display: inline-block;
+  width: 200px;
+  text-align: center;
+  min-height: 240px;
+  border: 1px solid ${({ theme }) => theme.blueColor};
+  background-color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+
+  img {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    margin-top: 15px;
+    border: 1px solid #ccc;
+  }
+
+  .spanName {
+    font-weight: bold;
+    margin-top: 18px;
+    font-size: 16px;
+  }
+  .spanPositon {
+    margin-bottom: 20px;
+  }
+  .spanDesc {
+  }
+`;

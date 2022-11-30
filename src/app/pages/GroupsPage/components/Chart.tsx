@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-import { Tree, TreeNode } from 'react-organizational-chart';
+import React from 'react';
+import { Tree } from 'react-organizational-chart';
+import { themes } from 'styles/theme/themes';
 import CardInfo from './Card';
+import TreeNodeChart from './TreeNodeChart';
 
 const Chart = () => {
   const groupsData = {
@@ -9,6 +11,7 @@ const Chart = () => {
       name: 'Thàng Nguyễn',
       position: 'Trưởng nhóm',
       desc: 'WF Nguyễn',
+      total: 1000000000,
     },
     membersInfo: [
       {
@@ -16,26 +19,129 @@ const Chart = () => {
         name: 'Nguyễn Thàng',
         position: 'FrontEnd Developer',
         desc: 'FE ReactJs',
+        total: 300000000,
+        childMember: [
+          {
+            avatar: '',
+            name: 'Nguyễn Thàng',
+            position: 'FrontEnd Developer',
+            desc: 'FE ReactJs',
+            total: 100000000,
+            childMember: [
+              {
+                avatar: '',
+                name: 'Nguyễn Thàng',
+                position: 'FrontEnd Developer',
+                desc: 'FE ReactJs',
+                total: 30000000,
+
+                childMember: [
+                  {
+                    avatar: '',
+                    name: 'Nguyễn Thàng',
+                    position: 'FrontEnd Developer',
+                    desc: 'FE ReactJs',
+                    total: 30000000,
+                    childMember: [],
+                  },
+                ],
+              },
+              {
+                avatar: '',
+                name: 'Nguyễn Thàng',
+                position: 'FrontEnd Developer',
+                desc: 'FE ReactJs',
+                total: 30000000,
+
+                childMember: [],
+              },
+              {
+                avatar: '',
+                name: 'Nguyễn Thàng',
+                position: 'FrontEnd Developer',
+                desc: 'FE ReactJs',
+                total: 40000000,
+                childMember: [],
+              },
+            ],
+          },
+          {
+            avatar: '',
+            name: 'Nguyễn Thàng',
+            position: 'FrontEnd Developer',
+            desc: 'FE ReactJs',
+            total: 100000000,
+
+            childMember: [],
+          },
+          {
+            avatar: '',
+            name: 'Nguyễn Thàng',
+            position: 'FrontEnd Developer',
+            desc: 'FE ReactJs',
+            total: 100000000,
+
+            childMember: [],
+          },
+        ],
       },
       {
         avatar: '',
         name: 'Nguyễn Thàng',
         position: 'FrontEnd Developer',
         desc: 'FE ReactJs',
+        total: 300000000,
+        childMember: [
+          {
+            avatar: '',
+            name: 'Nguyễn Thàng',
+            position: 'FrontEnd Developer',
+            desc: 'FE ReactJs',
+            total: 150000000,
+            childMember: [],
+          },
+          {
+            avatar: '',
+            name: 'Nguyễn Thàng',
+            position: 'FrontEnd Developer',
+            desc: 'FE ReactJs',
+            childMember: [],
+            total: 150000000,
+          },
+        ],
       },
       {
         avatar: '',
         name: 'Nguyễn Thàng',
         position: 'FrontEnd Developer',
         desc: 'FE ReactJs',
+        total: 400000000,
+        childMember: [
+          {
+            avatar: '',
+            name: 'Nguyễn Thàng',
+            position: 'FrontEnd Developer',
+            desc: 'FE ReactJs',
+            total: 200000000,
+            childMember: [],
+          },
+          {
+            avatar: '',
+            name: 'Nguyễn Thàng',
+            position: 'FrontEnd Developer',
+            desc: 'FE ReactJs',
+            total: 200000000,
+            childMember: [],
+          },
+        ],
       },
     ],
   };
   return (
     <div>
       <Tree
-        lineWidth={'2px'}
-        lineColor={'#ccc'}
+        lineWidth={'1px'}
+        lineColor={themes.dark.blueColor}
         lineBorderRadius={'10px'}
         label={
           <CardInfo
@@ -43,22 +149,18 @@ const Chart = () => {
             position={groupsData.leadInfo.position}
             desc={groupsData.leadInfo.desc}
             avatar={groupsData.leadInfo.avatar}
+            total={groupsData.leadInfo.total}
           />
         }
         nodePadding="10px"
         lineHeight="30px"
       >
-        {groupsData.membersInfo.map((item: any) => (
-          <TreeNode
-            label={
-              <CardInfo
-                name={item?.name}
-                position={item?.position}
-                desc={item?.desc}
-                avatar={item?.avatar}
-              />
-            }
-          />
+        {groupsData.membersInfo.map((item: any, index: number) => (
+          <TreeNodeChart
+            key={index}
+            data={item}
+            child={item?.childMember || []}
+          ></TreeNodeChart>
         ))}
       </Tree>
     </div>

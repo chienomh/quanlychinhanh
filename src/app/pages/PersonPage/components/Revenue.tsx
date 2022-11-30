@@ -1,4 +1,4 @@
-import { Card, Result, Typography } from 'antd';
+import { Card, Result } from 'antd';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -7,6 +7,7 @@ import { selectPersonalPageState } from '../slice/selectors';
 import { DataPerson } from '../type';
 import { MonthPickerWrapper } from './MonthPicker';
 import { AiFillExclamationCircle } from 'react-icons/ai';
+import { formatNumber } from 'utils/formatNumber';
 
 const Revenue = () => {
   const { selectTime } = useSelector(selectPersonalPageState);
@@ -23,9 +24,9 @@ const Revenue = () => {
     (item: any) => item.month === moment(selectTime).format('MM/YYYY'),
   );
 
-  const formatNumber = (number: number) => {
-    return new Intl.NumberFormat().format(number) || number;
-  };
+  // const formatNumber = (number: number) => {
+  //   return new Intl.NumberFormat().format(number) || number;
+  // };
 
   return (
     <Wrapper>
@@ -40,11 +41,7 @@ const Revenue = () => {
       {revenueSelectedMonth ? (
         <>
           <div className="revenueWrap">
-            <Card
-              headStyle={{ backgroundColor: '#ccc' }}
-              title="Doanh thu sỉ lẻ"
-              className="cardInfo"
-            >
+            <StyledCard title="Doanh thu sỉ lẻ" className="cardInfo">
               <p>
                 Tổng đơn hàng:{' '}
                 {formatNumber(revenueSelectedMonth?.retailRevenue?.totalOrder)}
@@ -57,12 +54,8 @@ const Revenue = () => {
                 Lợi nhuận:{' '}
                 {formatNumber(revenueSelectedMonth?.retailRevenue?.interest)}đ
               </p>
-            </Card>
-            <Card
-              headStyle={{ backgroundColor: '#ccc' }}
-              title="Doanh thu đội nhóm"
-              className="cardInfo"
-            >
+            </StyledCard>
+            <StyledCard title="Doanh thu đội nhóm" className="cardInfo">
               <p>
                 Tổng số thành viên:{' '}
                 {formatNumber(revenueSelectedMonth?.groupRevenue?.totalMember)}
@@ -71,14 +64,10 @@ const Revenue = () => {
                 Lợi nhuận đạt được:{' '}
                 {formatNumber(revenueSelectedMonth?.groupRevenue?.interest)}đ
               </p>
-            </Card>
-            <Card
-              headStyle={{ backgroundColor: '#ccc' }}
-              title="Tiền thưởng"
-              className="cardInfo"
-            >
+            </StyledCard>
+            <StyledCard title="Tiền thưởng" className="cardInfo">
               <p>Thành tiền: {formatNumber(revenueSelectedMonth?.bonus)}đ</p>
-            </Card>
+            </StyledCard>
           </div>
           <h1 className="totalMoneySpan">
             Tổng tiền nhận được:{' '}
@@ -135,5 +124,14 @@ const Wrapper = styled.div`
     & > span {
       color: red;
     }
+  }
+`;
+
+// eslint-disable-next-line prettier/prettier
+
+const StyledCard = styled(Card)`
+  .ant-card-head {
+    background-color: ${({ theme }) => theme.blueColor};
+    color: white;
   }
 `;

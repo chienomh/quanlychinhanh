@@ -1,4 +1,3 @@
-import LayoutConfig from 'components/layouts';
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import Chart from './components/Chart';
