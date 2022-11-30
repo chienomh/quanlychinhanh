@@ -21,9 +21,9 @@ const PersonalPage = () => {
         'personData',
         JSON.stringify({
           id: 1,
-          name: 'Cao Mỗ',
+          name: 'Nguyễn Văn A',
           birth: moment('20001203', 'YYYYMMDD').format(),
-          img: 'https://s.memehay.com/files/posts/20200905/meme-khoa-mom-chu-cho-bi-bop-mom-c9bee3f124dd83d2cce3c4470a21d22f.jpg',
+          img: 'https://ict-imgs.vgcloud.vn/2020/09/01/19/huong-dan-tao-facebook-avatar.jpg',
           email: 'mountmo@gmail.com',
           address: 'Vĩnh Tường, Tuyên Quang',
           phone: '0123232323',

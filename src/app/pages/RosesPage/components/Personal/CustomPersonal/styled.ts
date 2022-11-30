@@ -5,13 +5,14 @@ export const Wrapper = styled('div')(() => ({
   border: '1px solid black',
 }));
 
-export const Header = styled('div')(() => ({
+export const Header = styled('div')(({ theme }) => ({
   width: '100%',
-  backgroundColor: '#a1d1ff',
+  backgroundColor: theme.blueColor,
   padding: '10px',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
+  color: 'white',
 }));
 
 export const Title = styled('div')(() => ({
