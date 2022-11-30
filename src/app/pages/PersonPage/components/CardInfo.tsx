@@ -46,7 +46,7 @@ const CardInfo = (props: Iprops) => {
 export default CardInfo;
 
 const Wrapper = styled.div`
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 15px;
   border-radius: 5px;
   display: flex;

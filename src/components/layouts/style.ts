@@ -9,4 +9,31 @@ export const Logo = styled.div`
 
 export const StyledLayout = styled(Layout)`
   height: 100vh;
+  width: 100vw;
+`;
+
+export const StyledContent = styled(Layout.Content)`
+  overflow: scroll;
+  padding: 16px;
+
+  ::-webkit-scrollbar {
+    height: 5px;
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #66beff;
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #66beff;
+  }
+  ::-webkit-scrollbar-corner {
+    display: none;
+  }
 `;

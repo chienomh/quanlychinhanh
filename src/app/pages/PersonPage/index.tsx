@@ -97,7 +97,7 @@ const PersonalPage = () => {
                 interest: 5000000,
               },
               bonus: 15000000,
-              totalMoney: 4000000000,
+              totalMoney: 4000000000.03,
             },
           ],
         }),

@@ -1,16 +1,15 @@
 import { Layout, Menu } from 'antd';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FaUserAlt, FaBoxOpen, FaSketch } from 'react-icons/fa';
 import { MdGroups } from 'react-icons/md';
-import { BsBorderStyle } from 'react-icons/bs';
-import { Logo, StyledLayout } from './style';
+import { Logo, StyledContent, StyledLayout } from './style';
 
 type Iprops = {
   children: JSX.Element;
 };
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Sider } = Layout;
 
 const LayoutConfig = ({ children }: Iprops) => {
   const [collapsed, setCollapsed] = useState<boolean>(false);
@@ -56,10 +55,9 @@ const LayoutConfig = ({ children }: Iprops) => {
       </Sider>
       <Layout className="site-layout">
         <Header className="site-layout-background" style={{ padding: 0 }} />
-        <Content style={{ margin: '16px 16px' }}>{children}</Content>
-        {/* <Footer style={{ textAlign: 'center' }}>
-          Created by <b>No Bug, No Issue</b>
-        </Footer> */}
+        <StyledContent style={{ margin: '16px 16px' }}>
+          {children}
+        </StyledContent>
       </Layout>
     </StyledLayout>
   );

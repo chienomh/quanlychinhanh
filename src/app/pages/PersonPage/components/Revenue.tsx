@@ -1,4 +1,4 @@
-import { Card, Typography } from 'antd';
+import { Card, Result } from 'antd';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -7,6 +7,7 @@ import { selectPersonalPageState } from '../slice/selectors';
 import { DataPerson } from '../type';
 import { MonthPickerWrapper } from './MonthPicker';
 import { AiFillExclamationCircle } from 'react-icons/ai';
+import { formatNumber } from 'utils/formatNumber';
 
 const Revenue = () => {
   const { selectTime } = useSelector(selectPersonalPageState);
@@ -23,6 +24,10 @@ const Revenue = () => {
     (item: any) => item.month === moment(selectTime).format('MM/YYYY'),
   );
 
+  // const formatNumber = (number: number) => {
+  //   return new Intl.NumberFormat().format(number) || number;
+  // };
+
   return (
     <Wrapper>
       <div className="selectTime">
@@ -33,49 +38,52 @@ const Revenue = () => {
           selectedTime={selectTime}
         />
       </div>
-      <div className="revenueWrap">
-        <Card
-          headStyle={{ backgroundColor: '#ccc' }}
-          title="Doanh thu sỉ lẻ"
-          className="cardInfo"
-        >
-          <p>
-            Tổng đơn hàng: {revenueSelectedMonth?.retailRevenue?.totalOrder}
+      {revenueSelectedMonth ? (
+        <>
+          <div className="revenueWrap">
+            <StyledCard title="Doanh thu sỉ lẻ" className="cardInfo">
+              <p>
+                Tổng đơn hàng:{' '}
+                {formatNumber(revenueSelectedMonth?.retailRevenue?.totalOrder)}
+              </p>
+              <p>
+                Vốn:{' '}
+                {formatNumber(revenueSelectedMonth?.retailRevenue?.capital)}đ
+              </p>
+              <p>
+                Lợi nhuận:{' '}
+                {formatNumber(revenueSelectedMonth?.retailRevenue?.interest)}đ
+              </p>
+            </StyledCard>
+            <StyledCard title="Doanh thu đội nhóm" className="cardInfo">
+              <p>
+                Tổng số thành viên:{' '}
+                {formatNumber(revenueSelectedMonth?.groupRevenue?.totalMember)}
+              </p>
+              <p>
+                Lợi nhuận đạt được:{' '}
+                {formatNumber(revenueSelectedMonth?.groupRevenue?.interest)}đ
+              </p>
+            </StyledCard>
+            <StyledCard title="Tiền thưởng" className="cardInfo">
+              <p>Thành tiền: {formatNumber(revenueSelectedMonth?.bonus)}đ</p>
+            </StyledCard>
+          </div>
+          <h1 className="totalMoneySpan">
+            Tổng tiền nhận được:{' '}
+            {formatNumber(revenueSelectedMonth?.totalMoney)}đ
+          </h1>
+          <p className="nextLevelSpan">
+            <AiFillExclamationCircle className="iconWarn" />
+            <span>
+              Bạn cần hoàn thành 50.000.000đ để vị trí giám đốc có mức chiết
+              khấu 55% và nhận về tối thiểu 37.000.000đ
+            </span>
           </p>
-          <p>Vốn: {revenueSelectedMonth?.retailRevenue.capital}đ</p>
-          <p>Lợi nhuận: {revenueSelectedMonth?.retailRevenue?.interest}đ</p>
-        </Card>
-        <Card
-          headStyle={{ backgroundColor: '#ccc' }}
-          title="Doanh thu đội nhóm"
-          className="cardInfo"
-        >
-          <p>
-            Tổng số thành viên:{' '}
-            {revenueSelectedMonth?.groupRevenue?.totalMember}
-          </p>
-          <p>
-            Lợi nhuận đạt được: {revenueSelectedMonth?.groupRevenue?.interest}đ
-          </p>
-        </Card>
-        <Card
-          headStyle={{ backgroundColor: '#ccc' }}
-          title="Tiền thưởng"
-          className="cardInfo"
-        >
-          <p>Thành tiền: {revenueSelectedMonth?.bonus}đ</p>
-        </Card>
-      </div>
-      <h1 className="totalMoneySpan">
-        Tổng tiền nhận được: {revenueSelectedMonth?.totalMoney}đ
-      </h1>
-      <p className="nextLevelSpan">
-        <AiFillExclamationCircle className="iconWarn" />
-        <span>
-          Bạn cần hoàn thành 50.000.000đ để vị trí giám đốc có mức chiết khấu
-          55% và nhận về tối thiểu 37.000.000đ
-        </span>
-      </p>
+        </>
+      ) : (
+        <Result title="Không có dữ liệu doanh thu" status={404} />
+      )}
     </Wrapper>
   );
 };
@@ -116,5 +124,14 @@ const Wrapper = styled.div`
     & > span {
       color: red;
     }
+  }
+`;
+
+// eslint-disable-next-line prettier/prettier
+
+const StyledCard = styled(Card)`
+  .ant-card-head {
+    background-color: ${({ theme }) => theme.blueColor};
+    color: white;
   }
 `;

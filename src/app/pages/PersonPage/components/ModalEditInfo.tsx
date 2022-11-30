@@ -1,7 +1,7 @@
 import { Button, Col, DatePicker, Form, Input, Modal, Row } from 'antd';
 import { NotificationSuccess } from 'app/components/Notification';
 import moment from 'moment';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { BsUpload } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
