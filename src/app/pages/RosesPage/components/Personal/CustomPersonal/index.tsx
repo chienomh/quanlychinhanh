@@ -116,11 +116,6 @@ export default function CustomPersonal() {
     <Wrapper>
       <Header>
         <Title>Mức hoa hồng tùy chỉnh cho từng cá nhân</Title>
-        <MdEdit
-          size={20}
-          style={{ cursor: 'pointer' }}
-          onClick={handlerOpenModal}
-        />
       </Header>
       <WrapperSearch>
         <Search
